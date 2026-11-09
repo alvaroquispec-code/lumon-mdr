@@ -8,3 +8,5 @@ dist/
 .wrangler/
 *.log
 .DS_Store
+
+_to_delete/
