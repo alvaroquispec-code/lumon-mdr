@@ -1,11 +1,11 @@
 {
-  "teamCode": "TEAM-000",
-  "teamName": "Nombre de la cuadrilla",
-  "deployUrl": "https://",
-  "storageProvider": "SUPABASE | CLOUDINARY",
+  "teamCode": "TEAM-053",
+  "teamName": "Los Clauderos",
+  "deployUrl": "https://lumon-mdr-beryl.vercel.app",
+  "storageProvider": "SUPABASE",
   "integrantes": [
-    { "nombre": "Nombre Apellido", "codigo": "CODIGO UTEC" },
-    { "nombre": "Nombre Apellido", "codigo": "CODIGO UTEC" },
-    { "nombre": "Nombre Apellido", "codigo": "CODIGO UTEC" }
+    { "nombre": "Alvaro Quispe Carrillo", "codigo": "202510375" },
+    { "nombre": "Adriano Cosme Salazar", "codigo": "202520096" },
+    { "nombre": "Joaquim Alexander Carrion", "codigo": "202510461" }
   ]
 }

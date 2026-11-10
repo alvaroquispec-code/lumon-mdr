@@ -1,3 +1,25 @@
+# Los Clauderos · TEAM-053
+
+| Integrante | Código |
+|:--|:--|
+| Alvaro Quispe Carrillo | 202510375 |
+| Adriano Cosme Salazar | 202520096 |
+| Joaquim Alexander Carrion | 202510461 |
+
+**Producción:** https://lumon-mdr-beryl.vercel.app
+
+## Cómo ejecutar
+1. Node 24 LTS: `npm install`
+2. Copiar `.env.example` a `.env` con `VITE_API_BASE_URL=https://lumon-api.vercel.app/api/v1` y `VITE_WS_BASE_URL=wss://lumon-api.vercel.app/api/v1`
+3. `npm run dev` (local) o `npm run build`
+
+## Despliegue
+Vercel conectado a `main`, preset Vite, variables `VITE_*` en Vercel. `vercel.json` define las rewrites de SPA (excepto `/.well-known/`) y las cabeceras CSP, nosniff y Referrer-Policy. `X-Lumon-Build` se inyecta en el build desde `VERCEL_GIT_COMMIT_SHA` (7 caracteres); en local vale `dev`. El dominio se verificó publicando el token en `public/.well-known/lumon-verification.txt`.
+
+## Storage
+Pendiente (Supabase Storage, bucket `lumon-media`).
+
+---
 # Hackathon Frontend: Lumon Industries — Macrodata Refinement
 
 <div align="center">
