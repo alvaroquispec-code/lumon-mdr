@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { useAuth } from '../auth/AuthContext';
 import { ErrorBoundary } from './ErrorBoundary';
 import { Splash } from './Guards';
+import { EventsIndicator, EventsRoot } from '../events/EventsUI';
 
 export function Layout() {
   const { me, logout, can } = useAuth();
@@ -16,9 +17,11 @@ export function Layout() {
         <span className="font-mono font-bold tracking-widest text-teal-300">LUMON · MDR</span>
         <nav aria-label="Principal" className="flex gap-1">
           {can('files:read') && <NavLink to="/files" className={link}>Archivos</NavLink>}
+          {can('refiners:read') && <NavLink to="/refiners" className={link}>Expedientes</NavLink>}
           <NavLink to="/estado" className={link}>Estado</NavLink>
         </nav>
         <div className="ml-auto flex items-center gap-3 text-sm">
+          <EventsIndicator />
           {me && <span className="text-slate-300">{me.displayName} · {me.team.code} · {me.role.name}</span>}
           <button className="rounded border border-slate-600 px-3 py-1 hover:bg-slate-800" onClick={() => void logout()}>
             Cerrar sesión
@@ -32,6 +35,7 @@ export function Layout() {
           </Suspense>
         </ErrorBoundary>
       </main>
+      <EventsRoot />
     </div>
   );
 }

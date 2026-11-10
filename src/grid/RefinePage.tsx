@@ -4,6 +4,7 @@ import { ApiError, api, errorText, isRecord, requestRaw, retryAfterMs, sleep } f
 import { BINS, type Bin, type LumonFile, type Progress, type RefineResult, type Rules } from '../api/types';
 import { useAuth } from '../auth/AuthContext';
 import { BIN_CHAR, TileStore, findGroup, type GroupInfo } from './tileStore';
+import { subscribeEvents } from '../events/stream';
 
 const CELL = 26;
 const MAX_CELLS = 2400;
@@ -95,6 +96,19 @@ function Refiner({ file, rules, params, setParams, canRefine }: RefinerProps) {
   const pendingRef = useRef(false);
   const intentRef = useRef<{ key: string; body: string } | null>(null);
   const focusFromKeyboard = useRef(false);
+
+  // eventos en vivo: refinamientos de otros
+  useEffect(() => subscribeEvents((ev) => {
+    const d = ev.data as { fileId?: number; cells?: Array<{ r: number; c: number }>; bin?: Bin; progress?: Progress } | null;
+    if (!d || d.fileId !== file.id) return;
+    if (ev.type === 'refinement.created' && d.cells && d.bin) {
+      const ch = BIN_CHAR[d.bin];
+      for (const x of d.cells) store.setBin(x.r, x.c, ch);
+      store.notify();
+      if (d.progress) setProgress(d.progress);
+    }
+    if (ev.type === 'file.completed') setStats((s) => ({ ...s, status: 'COMPLETE' }));
+  }), [file.id, store]);
 
   // posición inicial
   useLayoutEffect(() => {

@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound';
 const FilesPage = lazy(() => import('./pages/Files'));
 const RefinePage = lazy(() => import('./grid/RefinePage'));
 const EstadoPage = lazy(() => import('./pages/Estado'));
+const RefinersPage = lazy(() => import('./pages/Refiners'));
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/" element={<Navigate to="/files" replace />} />
         <Route path="/files" element={<RequirePerm perm="files:read"><FilesPage /></RequirePerm>} />
         <Route path="/files/:id/refine" element={<RequirePerm perm="files:read"><RefinePage /></RequirePerm>} />
+        <Route path="/refiners" element={<RequirePerm perm="refiners:read"><RefinersPage /></RequirePerm>} />
         <Route path="/estado" element={<EstadoPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>
